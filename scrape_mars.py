@@ -2,14 +2,14 @@ import requests
 import pandas as pd
 from splinter import Browser
 from bs4 import BeautifulSoup
-from webdriver_manager.chrome import ChromeDriveManager
+from selenium import webdriver
 
 def scrape():
 
     mars_data = {}
 
     # Setup splinter
-    executable_path = {'executable_path': ChromeDriverManager().install()}
+    executable_path = {'executable_path': 'C:/Users/atvar/.wdm/drivers/chromedriver/win32/91.0.4472.19/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
 
     url = "https://redplanetscience.com/"
@@ -24,7 +24,7 @@ def scrape():
     browser.quit()
 
     # Setup splinter
-    executable_path = {'executable_path': ChromeDriverManager().install()}
+    executable_path = {'executable_path': 'C:/Users/atvar/.wdm/drivers/chromedriver/win32/91.0.4472.19/chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
 
     url = 'https://spaceimages-mars.com/'
