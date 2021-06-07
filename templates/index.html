@@ -7,6 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie_edge">
     <title>Mars!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        table, th, td
+        {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 3px;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,54 +24,37 @@
             <h1 style="font-weight: bold;">Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
-        <h4 style="font-weight: bold;">Latest Mars News</h4>
-        <h5 style="font-weight: bold;">{{ mars.news_title }}</h5>
+        <h2 style="font-weight: bold;">Latest Mars News</h2>
+        <h4 style="font-weight: bold;">{{ mars.news_title }}</h4>
         <p>{{ mars.news_p }}</p>
     </div>
 
-    <div class="container">
-        <div class="col-12 col-md-8">
-            <h4 style="font-weight: bold;">Featured Mars Image</h4>
-            <img src="{{ mars.featured_image }}" class="img-responsive" style="max-width:100%; max-height: auto;" alt="Featured Mars Image">
+    <div class="container-fluid">
+        <div class="col-md-8">
+            <h2 style="font-weight: bold;">Featured Mars Image</h2>
+            <img src="{{ mars.featured_image }}" class="img-responsive" style="max-width:600px; max-height:800px;" alt="Featured Mars Image">
         </div>
 
-        <div class="col-6 col-md-4">
+        <div class="col-md-4">
             <h4 style="font-weight: bold;">Mars Facts</h4>
-            <table>
-                {{ mars.table }}
-            </table>
+            <div>{{ mars.table |safe }}</div>
         </div>
     </div>
 
-    <h4 style="text-align: center; font-weight: bold;">Mars Hemispheres</h4>
+    <h2 style="text-align: center; font-weight: bold;">Mars Hemispheres</h2>
     <div class="row">
-        <div class="card-deck">
-            <hr>
-            <div class="col-md-6">
-                <div class="col-md-12">
-                    {% for hemisphere in mars.hemispheres[0:2] %}
-                        <div class="card">
-                            <img class="card-img-top" src="{{ hemisphere.img_url }}" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ hemisphere.title }}</h5>
-                            </div>
-                        </div>
-                    {% endfor %}
+        {% for hemisphere in mars.hemispheres %}
+        <div class="col-md-6">
+            <div class="card" style="size:25rem;">
+                <div style="text-align:center;">
+                    <img src="{{ hemisphere.img_url }}" class="card-img-top" alt="{{ hemisphere.title }}" style="width:50%; height:50%;">
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="col-md-12">
-                    {% for hemisphere in mars.hemispheres[2:4] %}
-                        <div class="card">
-                            <img class="card-img-top" src="{{ hemisphere.img_url }}" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ hemisphere.title }}</h5>
-                            </div>
-                        </div>
-                    {% endfor %}
+                <div class="card-body">
+                    <h4 class="card-text" style="text-align: center;"><b>{{ hemisphere.title }}</b></h4>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
